@@ -1,0 +1,71 @@
+<form action="/" method="get">
+<div class="container-1">
+    <div class="header"><h1> Your blog</h1></div>
+    <div> <a href="/"><button class="signout-btn"><h3>Log-out</h3></button></a></div>
+</div>
+</form>
+<div class="container-2">
+    <textarea  id="box-content" cols="30" rows="10"></textarea>
+    <div class="btns">
+        <button id="delete">Delete</button>
+        <button id="save"> Save</button>
+    </div>
+
+</div>
+
+<script>
+const deletebtn=document.querySelector('#delete');
+const savebtn=document.querySelector('#save');
+const boxContent=document.querySelector('#box-content');
+
+deletebtn.addEventListener('click',(event)=>{
+        boxContent.value="";
+
+})
+savebtn.addEventListener('click',()=>{
+        const value=boxContent.value;
+        console.log(value)
+})
+</script>
+<style>
+    *{
+        margin:0
+        padding:0
+    }
+    .container-1{
+     
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left:564px;
+        
+    }
+    .header{
+        border: 1px solid black;
+        width: fit-content;
+    }
+    .box-content{
+        border: 1px solid red;
+       height: 499px;
+       margin-top: 0;
+    }
+    .container-2{
+        border:1px solid black;
+        width: 700px;
+        height: 500px;
+        margin-left:297px;
+    }
+    .fill-box{
+        width: 692px;
+        height: 494px;
+        text-align: top;
+    }
+    .signout-btn{
+   
+    }
+    .btns{
+        display: flex;
+        flex-direction: row;
+    }
+</style>

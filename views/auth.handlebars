@@ -1,0 +1,58 @@
+<form method="POST" action="/create">
+   
+    <div class="box">
+        <div class="header">Registration</div>
+        <div class="container">
+            <input type="text" name="username" placeholder="username" class="user-box">
+            <input type="password" name="password" placeholder="password" class="key-box">
+        </div>
+        <div id="submit-btn"><input type="submit" id="submit"></div>
+    </div>
+</form>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    .box{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        border: 1px solid black;
+        width: 180px;
+
+       
+        padding-left: 30px;
+         padding-right: 30px;
+     
+        height: 255px;
+        margin-left:521px;
+        margin-top:39px;
+
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+           gap:10px;
+           margin-top: 20px;
+
+    }
+    .user-box{
+        text-align: center;
+        height: 22px;
+    }
+      .key-box{
+              text-align: center;
+        height: 22px;
+    }
+    #submit-btn{
+        margin-top:20px;
+        margin-left:62px;
+       
+    }
+    .header{
+      margin-top: 30px;
+      margin-left:45px
+    }
+</style>
