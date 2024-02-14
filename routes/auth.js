@@ -1,6 +1,7 @@
 const passport=require('passport')
 const strategy=require('passport-local')
 const database=require('../mongodb/schema.js')
+const {comparePassword}=require('../mongodb/hashing.js')
 
 passport.use(new strategy( async (username,password,done)=>{
     try{
@@ -8,7 +9,7 @@ passport.use(new strategy( async (username,password,done)=>{
      
         const findUser=await database.findOne({username})
         if(!findUser) throw new Error('User Not FOUND')
-        if(findUser.password!=password) throw new Error('Invalid password')
+        if(!comparePassword(password,findUser.password)) throw new Error('Invalid password')
             console.log('User authenticated')
         done(null,findUser)
      }catch(err){

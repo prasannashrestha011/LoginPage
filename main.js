@@ -32,6 +32,9 @@ mongoose.connect('mongodb://localhost:27017/UserData').then(()=>{
     console.log(err)
 })
 const userSchema=require('./mongodb/schema.js')
+//hashing
+const {hashing}=require('./mongodb/hashing.js')
+const {comparePassword}=require('./mongodb/hashing.js')
 app.use(Routes)
 app.get('/',(req,res)=>{
     res.render('default')
@@ -41,19 +44,25 @@ app.get('/create',(req,res)=>{
     res.render('auth')
 })
 app.post('/create', checkSchema(userValidation), async (req, res) => {
-    const DetectErr = validationResult(req)
     try {
-        if (!DetectErr.isEmpty()) throw DetectErr.array()
-        const { body } = req
-        const newUser = new userSchema(body)
-        const savedUser = await newUser.save()
-        console.log("User saved")
-        res.render('message')
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { body } = req;
+        body.password = await hashing(body.password);
+        const newUser = new userSchema(body);
+        const savedUser = await newUser.save();
+        console.log("User saved");
+        res.render('message');
     } catch (err) {
-     
-        res.send(err)
+        console.error("Error saving user:", err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-})
+});
+
+
 
 
 app.get('/auth',(req,res)=>{
